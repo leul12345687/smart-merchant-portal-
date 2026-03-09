@@ -1,0 +1,120 @@
+{
+  "app": {
+    "title": "የንግድ ገጽታ"
+  },
+  "login": {
+    "login": "ግባ",
+    "email": "ኢሜይል",
+    "password": "የሚስጥር ቃል",
+    "loggingIn": "በመግባት ላይ...",
+    "invalidCredentials": "ማስረጃ ትክክል አይደለም"
+  },
+  "navbar": {
+    "logout": "ውጣ"
+  },
+  "sidebar":{
+  "home": "መነሻ",
+  "properties": "ንብረቶች",
+  "addProperty": "ንብረት ያክሉ",
+  "bookings": "ቦታ በመያዣ",
+  "profile": "መገለጫ"
+},
+  "addProperty": {
+    "title": "አዲስ ንብረት ያክሉ",
+    "propertyName": "የንብረቱ ስም",
+    "description": "መግለጫ",
+    "category": "ምድብ",
+    "categoryOptions": {
+      "eventSupply": "የክስተት እቃዎች",
+      "constructionEquipment": "የስነ-ስራ መሳሪያዎች",
+      "healthcareMedical": "ጤና / ሕክምና",
+      "other": "ሌላ"
+    },
+    "hourlyPrice": "የሰዓት ዋጋ",
+    "dailyPrice": "የቀን ዋጋ",
+    "weeklyPrice": "የሳምንት ዋጋ",
+    "monthlyPrice": "የወር ዋጋ",
+    "yearlyPrice": "የዓመት ዋጋ",
+    "numberOfProperties": "የንብረቶች ብዛት",
+    "uploadImages": "ምስሎችን ይምረጡ",
+    "createButton": "ንብረት ይፍጠሩ",
+    "submitting": "በመስመር ላይ...",
+    "successMessage": "ንብረት ተፈጥሯል!",
+    "errorMessage": "ንብረት ማፍጠር አልተቻለም።"
+  },
+  "bookings": {
+    "title": "ቦኪንግ",
+    "loading": "ቦኪንግ በመጫን ላይ",
+    "noBookings": "ቦኪንግ አልተገኘም",
+    "noPaymentProof": "የክፍያ ማረጋገጫ የለም",
+    "columns": {
+      "index": "ቁጥር",
+      "propertyName": "የንብረት ስም",
+      "customer": "ደንበኛ",
+      "email": "ኢሜል",
+      "phone": "ስልክ",
+      "dates": "ቀኖች",
+      "totalPrice": "ጠቅላላ ዋጋ",
+      "numberOfProperties": "የንብረቶች ብዛት",
+      "status": "ሁኔታ",
+      "paymentProof": "የክፍያ ማረጋገጫ"
+    },
+    "statusOptions": {
+      "pending": "በመጠባበቅ",
+      "confirmed": "ተረጋግጧል",
+      "completed": "ተጠናቀቀ",
+      "cancelled": "ተሰርዟል"
+    },
+    "actions": {
+      "details": "ዝርዝር",
+      "delete": "ሰርዝ",
+      "close": "ዝጋ",
+      "updateStatusSuccess": "የቦኪንግ ሁኔታ ተሳካ ሁኔታ ተሳካ",
+      "updateStatusError": "የቦኪንግ ሁኔታ ማሻሻል አልተቻለም",
+      "deleteConfirm": "እርግጠኛ ነዎት ይህን ቦኪንግ ማስወገድ ይፈልጋሉ?",
+      "deleteSuccess": "ቦኪንግ ተሰርዟል",
+      "deleteError": "የቦኪንግ ማስወገድ አልተቻለም"
+    },
+    "error": "ቦኪንግ ሲመረጥ ላይ ስህተት ተከስቷል"
+  },
+  "dashboard": {
+    "welcome": "እንኳን ደህና መጡ, {name}",
+    "overview": "የእርስዎ አጠቃላይ እይታ እዚህ ነው",
+    "totalProperties": "የጠቅላላ ንብረቶች",
+    "activeRentals": "ንብረት እየተከራዩ ነው",
+    "revenueThisMonth": "ወሩ ያለው ገቢ"
+  },
+  "properties": {
+    "title": "🏢 የኔ ንብረቶች",
+    "loading": "ንብረቶችን በመጫን ላይ...",
+    "noProperties": "ንብረቶች አልተገኙም።",
+    "category": "ምድብ",
+    "status": "ሁኔታ",
+    "dailyPrice": "የቀን ዋጋ",
+    "viewDetails": "👁 ዝርዝር እይ",
+    "prices": "ዋጋዎች",
+    "hourly": "ሰዓታዊ",
+    "daily": "ቀናዊ",
+    "weekly": "ሳምንታዊ",
+    "monthly": "ወርሃዊ",
+    "yearly": "ዓመታዊ",
+    "edit": "✏️ አስተካክል",
+    "delete": "🗑 አጥፋ",
+    "close": "ዝጋ",
+    "save": "💾 አስቀምጥ",
+    "cancel": "ተዉ",
+    "available": "አለ",
+    "rented": "ተከራይ ላይ",
+    "maintenance": "በእንክብካቤ ላይ"
+  },
+"profile": {
+    "title": "የመነሻ መረጃ",
+    "fullName": "ሙሉ ስም",
+    "email": "ኢሜል",
+    "phone": "ስልክ ቁጥር",
+    "accountNumber": "የባንክ መለያ ቁጥር",
+    "businessName": "የቢዝነስ ስም",
+    "address": "አድራሻ",
+    "updateButton": "መረጃ አሻሽል"
+  }
+}
