@@ -16,10 +16,10 @@
    <div
   v-if="demandInfo && demandInfo.demandLevel"
   class="alert demand">
-  <strong>AI Demand Level:</strong> {{ demandInfo.demandLevel }} <br />
+  <strong>Demand Level:</strong> {{ demandInfo.demandLevel }} <br />
   <strong>Predicted Demand Score:</strong> {{ demandInfo.predictedDemand }} <br />
   <strong>Recommendation:</strong> {{ demandInfo.recommendedAction }} <br />
-  <strong>AI Note:</strong> {{ demandInfo.merchantNotification }}
+  <strong>Note:</strong> {{ demandInfo.merchantNotification }}
   </div>
 
       <form @submit.prevent="submitProperty" class="property-form">
@@ -98,13 +98,32 @@
         </div>
 
         <!-- Pricing -->
-        <div class="pricing-grid">
-          <input v-model.number="form.rentalPriceperhour" type="number" placeholder="Hourly" />
-          <input v-model.number="form.rentalPriceperday" type="number" placeholder="Daily" />
-          <input v-model.number="form.rentalPriceperweek" type="number" placeholder="Weekly" />
-          <input v-model.number="form.rentalPricepermonth" type="number" placeholder="Monthly" />
-          <input v-model.number="form.rentalPriceperyear" type="number" placeholder="Yearly" />
-        </div>
+       <div class="pricing-grid">
+  <div class="price-item">
+    <label>Rent Per Hour</label>
+    <input v-model.number="form.rentalPriceperhour" type="number" placeholder="ETB / hour" />
+  </div>
+
+  <div class="price-item">
+    <label>Rent Per Day</label>
+    <input v-model.number="form.rentalPriceperday" type="number" placeholder="ETB / day" />
+  </div>
+
+  <div class="price-item">
+    <label>Rent Per Week</label>
+    <input v-model.number="form.rentalPriceperweek" type="number" placeholder="ETB / week" />
+  </div>
+
+  <div class="price-item">
+    <label>Rent Per Month</label>
+    <input v-model.number="form.rentalPricepermonth" type="number" placeholder="ETB / month" />
+  </div>
+
+  <div class="price-item">
+    <label>Rent Per Year</label>
+    <input v-model.number="form.rentalPriceperyear" type="number" placeholder="ETB / year" />
+  </div>
+</div>
 
         <!-- Quantity -->
         <div class="form-group">

@@ -1,11 +1,17 @@
 <template>
   <div class="dashboard">
-    <h1 class="dashboard-title">{{ $t('dashboard.welcome', { name: merchantName }) }}</h1>
-    <p class="dashboard-subtitle">{{ $t('dashboard.overview') }}</p>
+    <h1 class="dashboard-title">
+      {{ $t('dashboard.welcome', { name: merchantName }) }}
+    </h1>
+    <p class="dashboard-subtitle">
+      {{ $t('dashboard.overview') }}
+    </p>
 
+    <!-- ✅ KEEP ALL CARDS INSIDE -->
     <div class="cards-container">
+
       <!-- Total Properties -->
-      <div class="card card-blue">
+      <div class="card card-blue" @click="goToProperties" style="cursor:pointer;">
         <div class="card-icon">🏢</div>
         <div class="card-content">
           <h2>{{ totalProperties }}</h2>
@@ -30,18 +36,22 @@
           <p>{{ $t('dashboard.revenueThisMonth') }}</p>
         </div>
       </div>
+
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue'
+<script setup>import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const merchantName = ref('')
 const totalProperties = ref(0)
 const activeRentals = ref(0)
 const revenueThisMonth = ref(0)
+const properties = ref([]) // ✅ store full list
 
 onMounted(async () => {
   const merchant = JSON.parse(localStorage.getItem('merchant'))
@@ -49,17 +59,35 @@ onMounted(async () => {
 
   try {
     const token = localStorage.getItem('merchantToken')
-    const { data } = await axios.get('https://lmgtech-4.onrender.com/merchant/operations/properties', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
 
-    totalProperties.value = data.total || data.properties.length
-    activeRentals.value = data.properties.filter(p => p.status === 'active').length
-    revenueThisMonth.value = data.properties.reduce((sum, p) => sum + (p.revenueThisMonth || 0), 0)
+    const { data } = await axios.get(
+      'https://lmgtech-4.onrender.com/merchant/operations/properties',
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    )
+
+    properties.value = data.properties || []  // ✅ save list
+
+    totalProperties.value = data.total || properties.value.length
+    activeRentals.value = properties.value.filter(p => p.status === 'active').length
+    revenueThisMonth.value = properties.value.reduce(
+      (sum, p) => sum + (p.revenueThisMonth || 0),
+      0
+    )
+
   } catch (err) {
     console.error(err)
   }
 })
+
+// ✅ Navigate with data
+const goToProperties = () => {
+  router.push({
+    path: '/properties',
+    state: { properties: properties.value } // pass data
+  })
+}
 </script>
 
 <style scoped>
