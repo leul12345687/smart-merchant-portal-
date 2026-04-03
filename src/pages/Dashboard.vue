@@ -32,7 +32,7 @@
       <div class="card card-yellow">
         <div class="card-icon">💰</div>
         <div class="card-content">
-          <h2>{{ revenueThisMonth }}</h2>
+          <h2>{{ formatCurrency(revenueThisMonth) }}</h2>
           <p>{{ $t('dashboard.revenueThisMonth') }}</p>
         </div>
       </div>
@@ -53,6 +53,12 @@ const activeRentals = ref(0)
 const revenueThisMonth = ref(0)
 const properties = ref([]) // ✅ store full list
 
+// ================= HELPERS =================
+const formatCurrency = (value) => {
+  if (value === null || value === undefined || isNaN(value)) return "0 ETB"
+  return new Intl.NumberFormat().format(value) + " ETB"
+}
+
 onMounted(async () => {
   const merchant = JSON.parse(localStorage.getItem('merchant'))
   merchantName.value = merchant?.name || 'Merchant'
@@ -60,24 +66,41 @@ onMounted(async () => {
   try {
     const token = localStorage.getItem('merchantToken')
 
-    const { data } = await axios.get(
+    // Fetch properties data
+    const propertiesResponse = await axios.get(
       'https://lmgtech-4.onrender.com/merchant/operations/properties',
       {
         headers: { Authorization: `Bearer ${token}` }
       }
     )
 
-    properties.value = data.properties || []  // ✅ save list
-
-    totalProperties.value = data.total || properties.value.length
+    properties.value = propertiesResponse.data.properties || []
+    totalProperties.value = propertiesResponse.data.total || properties.value.length
     activeRentals.value = properties.value.filter(p => p.status === 'active').length
-    revenueThisMonth.value = properties.value.reduce(
-      (sum, p) => sum + (p.revenueThisMonth || 0),
-      0
-    )
+
+    // Fetch financial data for real revenue
+    try {
+      const financialResponse = await axios.get(
+        'https://lmgtech-4.onrender.com/merchant/financial-info',
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      )
+
+      if (financialResponse.data?.success && financialResponse.data.financialInfo) {
+        revenueThisMonth.value = financialResponse.data.financialInfo.monthlyIncome || 0
+      }
+    } catch (financialErr) {
+      console.warn('Could not fetch financial data, using properties calculation as fallback:', financialErr)
+      // Fallback to properties calculation if financial API fails
+      revenueThisMonth.value = properties.value.reduce(
+        (sum, p) => sum + (p.revenueThisMonth || 0),
+        0
+      )
+    }
 
   } catch (err) {
-    console.error(err)
+    console.error('Error fetching dashboard data:', err)
   }
 })
 
