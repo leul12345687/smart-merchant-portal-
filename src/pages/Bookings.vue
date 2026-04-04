@@ -24,6 +24,7 @@
       <main class="main-panel">
         <div class="panel-card">
           <div class="card-header">Bookings</div>
+
           <div class="table-wrapper" v-if="!loading && bookings.length">
             <table class="booking-table">
               <thead>
@@ -37,18 +38,34 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="booking in filteredBookings" :key="booking.bookingId" @click="openBookingDetails(booking)">
+                <tr
+                  v-for="booking in filteredBookings"
+                  :key="booking.bookingId"
+                  @click="openBookingDetails(booking)"
+                >
                   <td>{{ booking.propertyName }}</td>
                   <td>{{ booking.customerName }}</td>
                   <td>{{ formatCurrency(booking.totalPrice) }}</td>
-                  <td><span :class="['small-badge', statusClass(booking.status)]">{{ booking.status }}</span></td>
-                  <td><span :class="['small-badge', paymentClass(booking.paymentStatus)]">{{ booking.paymentStatus }}</span></td>
+                  <td>
+                    <span :class="['small-badge', statusClass(booking.status)]">
+                      {{ booking.status }}
+                    </span>
+                  </td>
+                  <td>
+                    <span :class="['small-badge', paymentClass(booking.paymentStatus)]">
+                      {{ booking.paymentStatus }}
+                    </span>
+                  </td>
                   <td><button class="details-btn">View</button></td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div v-if="!loading && !bookings.length" class="no-data">No bookings available</div>
+
+          <div v-if="!loading && !bookings.length" class="no-data">
+            No bookings available
+          </div>
+
           <div v-if="loading" class="loading-overlay">
             <div class="spinner"></div>
             <p>{{ t('bookings.loading') }}</p>
@@ -71,15 +88,23 @@
         <div class="panel-card upcoming-panel">
           <div class="card-header">Upcoming Bookings</div>
           <ul>
-            <li v-for="booking in filteredBookings.slice(0, 5)" :key="booking.bookingId" @click="openBookingDetails(booking)">
+            <li
+              v-for="booking in filteredBookings.slice(0, 5)"
+              :key="booking.bookingId"
+              @click="openBookingDetails(booking)"
+            >
               <section>
                 <strong>{{ booking.propertyName }}</strong>
                 <p>{{ booking.customerName }}</p>
               </section>
-              <span class="status-dot" :class="statusClass(booking.status)">{{ booking.status }}</span>
+              <span class="status-dot" :class="statusClass(booking.status)">
+                {{ booking.status }}
+              </span>
             </li>
           </ul>
-          <div v-if="filteredBookings.length === 0" class="no-data">No upcoming booking.</div>
+          <div v-if="filteredBookings.length === 0" class="no-data">
+            No upcoming booking.
+          </div>
         </div>
 
         <div class="panel-card chart-panel">
@@ -89,55 +114,32 @@
       </aside>
     </div>
 
+    <!-- MODAL -->
     <div v-if="selectedBooking" class="modal-overlay" @click.self="selectedBooking = null">
       <div class="modal">
         <div class="modal-header">
           <h3>{{ selectedBooking.propertyName }}</h3>
           <button class="close-btn" @click="selectedBooking = null">×</button>
         </div>
+
         <div class="modal-body">
           <p><strong>Customer:</strong> {{ selectedBooking.customerName }}</p>
           <p><strong>Email:</strong> {{ selectedBooking.customerEmail }}</p>
           <p><strong>Phone:</strong> {{ selectedBooking.customerPhone }}</p>
-          <p><strong>Dates:</strong> {{ formatDate(selectedBooking.startDate) }} → {{ formatDate(selectedBooking.endDate) }}</p>
+          <p>
+            <strong>Dates:</strong>
+            {{ formatDate(selectedBooking.startDate) }} →
+            {{ formatDate(selectedBooking.endDate) }}
+          </p>
           <p><strong>Status:</strong> {{ selectedBooking.status }}</p>
           <p><strong>Payment:</strong> {{ selectedBooking.paymentStatus }}</p>
           <p><strong>Total Price:</strong> {{ formatCurrency(selectedBooking.totalPrice) }}</p>
         </div>
-        <div class="modal-actions">
-          <button class="delete-btn" @click="deleteBooking(selectedBooking.bookingId)">Delete Booking</button>
-          <button class="close-btn" @click="selectedBooking = null">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>              <option value="REJECTED">Rejected</option>
-            </select>
-          </p>
-
-          <p><strong>Total Price:</strong> {{ selectedBooking.totalPrice }}</p>
-          <p><strong>Quantity:</strong> {{ selectedBooking.numberOfProperty }}</p>
-        </div>
-
-        <!-- Payment Proof -->
-        <div class="payment-proof">
-          <h3>Payment Proof</h3>
-          <img
-            v-if="selectedBooking.paymentProofPath"
-            :src="getImageUrl(selectedBooking.paymentProofPath)"
-            class="modal-img"
-          />
-          <p v-else class="text-gray">No payment proof uploaded</p>
-        </div>
 
         <div class="modal-actions">
-          <button
-            class="delete-btn"
-            @click="deleteBooking(selectedBooking.bookingId)"
-          >
+          <button class="delete-btn" @click="deleteBooking(selectedBooking.bookingId)">
             Delete Booking
           </button>
-
           <button class="close-btn" @click="selectedBooking = null">
             Close
           </button>
@@ -146,7 +148,6 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
