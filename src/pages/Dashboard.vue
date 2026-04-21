@@ -68,7 +68,7 @@ onMounted(async () => {
 
     // Fetch properties data
     const propertiesResponse = await axios.get(
-      'https://lmgtech-4.onrender.com/merchant/operations/properties',
+      'https://lmgtech-e1q0.onrender.com/merchant/operations/properties',
       {
         headers: { Authorization: `Bearer ${token}` }
       }
@@ -81,7 +81,7 @@ onMounted(async () => {
     // Fetch financial data for real revenue
     try {
       const financialResponse = await axios.get(
-        'https://lmgtech-4.onrender.com/merchant/financial-info',
+        'https://lmgtech-e1q0.onrender.com/merchant/financial-info',
         {
           headers: { Authorization: `Bearer ${token}` }
         }

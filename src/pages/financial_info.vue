@@ -73,7 +73,7 @@ import { ref, onMounted, watch, nextTick, computed } from "vue"
 import axios from "axios"
 import Chart from "chart.js/auto"
 
-const API_BASE = "https://lmgtech-4.onrender.com"
+const API_BASE = "https://lmgtech-e1q0.onrender.com"
 
 // ================= STATE =================
 const loading = ref(true)

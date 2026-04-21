@@ -157,7 +157,7 @@ import { useI18n } from 'vue-i18n'
 
 const { t, locale } = useI18n()
 
-const API_BASE = 'https://lmgtech-4.onrender.com'
+const API_BASE = 'https://lmgtech-e1q0.onrender.com'
 
 // =======================================
 // STATE (ALL REQUIRED VARIABLES)

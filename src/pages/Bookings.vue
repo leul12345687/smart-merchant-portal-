@@ -157,7 +157,7 @@ const { t } = useI18n()
 
 const API_BASE_URL =
   import.meta.env.VITE_API_URL ||
-  'https://lmgtech-4.onrender.com/merchant'
+  'https://lmgtech-e1q0.onrender.com/merchant'
 
 const CLOUD_BASE_URL =
   import.meta.env.VITE_CLOUD_URL ||

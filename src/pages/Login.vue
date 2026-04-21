@@ -187,7 +187,7 @@ async function login() {
   error.value = ''
   try {
     const { data } = await axios.post(
-      'https://lmgtech-4.onrender.com/merchant/login',
+      'https://lmgtech-e1q0.onrender.com/merchant/login',
       { email: email.value, password: password.value }
     )
     localStorage.setItem('merchantToken', data.token)
