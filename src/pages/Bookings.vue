@@ -178,7 +178,9 @@ const cancelledBookings = computed(() =>
   bookings.value.filter((b) => b.status === 'CANCELLED').length
 )
 const totalRevenue = computed(() =>
-  bookings.value.reduce((total, b) => total + (Number(b.totalPrice) || 0), 0)
+  bookings.value
+    .filter((b) => b.status === 'CONFIRMED')
+    .reduce((total, b) => total + (Number(b.totalPrice) || 0), 0)
 )
 
 const filteredBookings = computed(() => {
